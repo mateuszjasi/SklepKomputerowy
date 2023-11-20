@@ -1,0 +1,85 @@
+{% extends 'mainApp/base.html' %}
+{% load static %}
+
+{% block title %}
+Cart
+{% endblock %}
+
+{% block content %}
+    <h1>Cart Page</h1>
+    <hr class="mt-0 mb-4">
+    <div class="row">
+        <div class="col-md-7" style="height: 80vh; overflow-y: auto;">
+            {% if user_cart == None %}
+                <h5>No products in your cart</h5>
+            {% else %}
+                {% for item in user_cart.cartitem_set.all %}
+                    <div class="card mb-4 shadow" style="width: 45rem">
+                        <div class="row">
+                            <div class="col-sm-6">
+                                <a href="/product/{{ item.product.id }}">
+                                    <img src="{{ item.product.picture }}" onerror="this.onerror=null;this.src='{% static 'media/images/no_image.png' %}';" class="card-img-top" >
+                                </a>
+                            </div>
+                            <div class="col-sm-6">
+                                <div class="card-body">
+                                    <div style="display: flex; flex-direction: row">
+                                        <h3 class="card-title">{{ item.product.name }}</h3>
+                                    </div>
+                                    <p class="card-text">{{ item.product.short_description }}</p>
+                                    <hr class="mt-0 mb-2">
+                                    <h2 class="card-text">{{ item.product.price }} EUR</h2>
+                                    <h4>Quantity: <span class="badge badge-secondary">{{ item.amount }}</span></h4>
+                                    <hr class="mt-0 mb-4">
+                                    <form method="post" action="#">
+                                        <a href="/product/{{ item.product.id }}" class="btn btn-outline-success">View product</a>
+                                        {% csrf_token %}
+                                        <button type="submit" name="remove" value="{{ item.id }}" class="btn btn-outline-danger button-remove">Remove</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {%  endfor %}
+            {% endif %}
+        </div>
+        <div class="col-md-5">
+            {% if user_cart != None %}
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Product</th>
+                            <th>Price</th>
+                            <th>Quantity</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for item in user_cart.cartitem_set.all %}
+                            <tr>
+                                <td>{{ item.product.name }}</td>
+                                <td>{{ item.product.price }} EUR</td>
+                                <td>{{ item.amount }}</td>
+                            </tr>
+                        {% endfor %}
+                        <tr>
+                            <td>
+                                <h2>Total:</h2>
+                            </td>
+                            <td>
+                                <h2>{{ payment_sum }} EUR</h2>
+                            </td>
+                            <td colspan="1"></td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="d-flex justify-content-end">
+                    <form method="post" action="#">
+                        {% csrf_token %}
+                        <button type="submit" name="clear" value="clear" class="btn btn-outline-danger mr-1 button-clear" style="font-size:140%">Clear cart</button>
+                        <a href="/process-payment" class="btn btn-success" style="font-size:140%">Checkout</a>
+                    </form>
+                </div>
+            {% endif %}
+        </div>
+    </div>
+{% endblock %}

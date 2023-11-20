@@ -1,0 +1,25 @@
+{% extends 'mainApp/base.html' %}
+{% load static %}
+
+{% block title %}
+{{ product.name }} - Store
+{% endblock %}
+
+{% block content %}
+    <div style="display: flex; flex-direction: row">
+        <img src="{{ product.picture }}" onerror="this.onerror=null;this.src='{% static 'media/images/no_image.png' %}';" alt="" class="product-image mr-5 mb-3" width="40%" height="40%">
+        <div class="align-self-top">
+            <h1 style="font-size:500%">{{ product.name }}</h1>
+            <p style="font-size:120%">{{ product.short_description }}</p>
+            <hr class="mt-0 mb-4">
+            <h1>{{ product.price }} EUR</h1>
+            <form method="post" action="#">
+                {% csrf_token %}
+                <button type="submit" name="to-cart" value="to-cart" class="btn btn-success button-to-cart" style="font-size:200%">Add to cart</button>
+            </form>
+        </div>
+    </div>
+    <h2>Description</h2>
+    <hr class="mt-0 mb-4">
+    <p>{{ product.description }}</p>
+{% endblock %}

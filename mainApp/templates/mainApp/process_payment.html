@@ -1,0 +1,19 @@
+{% extends 'mainApp/payment_base.html' %}
+
+{% block title %}
+    Process Payment
+{% endblock %}
+
+{% block header %}
+    Process Payment
+{% endblock %}
+
+{% block content %}
+    <div class="text-center">
+        <h4>Choose payment method</h4>
+        <br>
+        {{ form.render }}
+        <br>
+        <a href="/cart" class="btn btn-success">Go back</a>
+    </div>
+{% endblock %}

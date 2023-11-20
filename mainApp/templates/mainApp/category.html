@@ -1,0 +1,54 @@
+{%  extends "mainApp/base.html" %}
+{% load static %}
+
+{% block title %}
+Category
+{% endblock %}
+
+{% block content %}
+    <h1>Category Page for {{ category }}</h1>
+    <hr class="mt-0 mb-4">
+    {% if items %}
+        <div class="sorting">
+            <div class="dropdown">
+                <h5 class="sorting-text">Sort By </h5>
+                <button class="btn btn-secondary dropdown-toggle sorting-button" id="sort-type-button" type="button" data-toggle="dropdown" aria-expanded="false">
+                    {{ button_name }}
+                </button>
+                <div class="dropdown-menu">
+                    <form method="post" action="#">
+                        {% csrf_token %}
+                        <button type="submit" name="sort-name" value="Name" class="dropdown-item">Name</button>
+                        <button type="submit" name="sort-price-desc" value="Price - Descending" class="dropdown-item">Price - Descending</button>
+                        <button type="submit" name="sort-price-asc" value="Price - Ascending" class="dropdown-item">Price - Ascending</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <br>
+        <div style="display: flex; flex-direction: row; flex-wrap: wrap">
+            {% for item in items %}
+                <div class="card shadow" style="width: 20rem; margin: 10px">
+                    <div class="card-body">
+                        <a href="/product/{{ item.pk }}">
+                            <img src="{{ item.picture }}" onerror="this.onerror=null;this.src='{% static 'media/images/no_image.png' %}';" class="card-img-top mb-3" >
+                        </a>
+                        <div style="display: flex; flex-direction: row">
+                            <h5 class="card-title">{{ item }}</h5>
+                        </div>
+                        <p class="card-text">{{ item.short_description }}</p>
+                        <hr class="mt-0 mb-2">
+                        <h2 class="card-text">{{ item.price }} EUR</h2>
+                        <form method="post" action="#">
+                            <a href="/product/{{ item.pk }}" class="btn btn-outline-success">View product</a>
+                            {% csrf_token %}
+                            <button type="submit" name="to-cart" value="{{ item.pk }}" class="btn btn-outline-success button-to-cart">Add to cart</button>
+                        </form>
+                    </div>
+                  </div>
+            {%  endfor %}
+        </div>
+    {% else %}
+        <h5>No products in this category</h5>
+    {% endif %}
+{% endblock %}
