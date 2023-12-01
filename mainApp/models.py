@@ -22,6 +22,7 @@ class Subcategory(models.Model):
     def __str__(self):
         return self.name
 
+
 class ShopItem(models.Model):
     name = models.CharField(max_length=200)
     price = models.DecimalField(max_digits=7, decimal_places=2)
