@@ -1,6 +1,10 @@
 {% extends 'mainApp/base.html' %}
 {% load static %}
 
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'mainApp/cart.css' %}">
+{% endblock %}
+
 {% block title %}
 Cart
 {% endblock %}
@@ -9,12 +13,12 @@ Cart
     <h1>Cart Page</h1>
     <hr class="mt-0 mb-4">
     <div class="row">
-        <div class="col-md-7" style="height: 80vh; overflow-y: auto;">
+        <div class="col-md-7 cart-main">
             {% if user_cart == None %}
                 <h5>No products in your cart</h5>
             {% else %}
                 {% for item in user_cart.cartitem_set.all %}
-                    <div class="card mb-4 shadow" style="width: 45rem">
+                    <div class="card mb-4 shadow cart-item">
                         <div class="row">
                             <div class="col-sm-6">
                                 <a href="/product/{{ item.product.id }}">
@@ -23,7 +27,7 @@ Cart
                             </div>
                             <div class="col-sm-6">
                                 <div class="card-body">
-                                    <div style="display: flex; flex-direction: row">
+                                    <div class="product-title">
                                         <h3 class="card-title">{{ item.product.name }}</h3>
                                     </div>
                                     <p class="card-text">{{ item.product.short_description }}</p>
@@ -75,8 +79,8 @@ Cart
                 <div class="d-flex justify-content-end">
                     <form method="post" action="#">
                         {% csrf_token %}
-                        <button type="submit" name="clear" value="clear" class="btn btn-outline-danger mr-1 button-clear" style="font-size:140%">Clear cart</button>
-                        <a href="/process-payment" class="btn btn-success" style="font-size:140%">Checkout</a>
+                        <button type="submit" name="clear" value="clear" class="btn btn-outline-danger mr-1 button-clear action-buttons">Clear cart</button>
+                        <a href="/process-payment" class="btn btn-success action-buttons">Checkout</a>
                     </form>
                 </div>
             {% endif %}

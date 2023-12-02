@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=yes">
 
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'mainApp/payment_base.css' %}">
 
     <title>
         {% block title %}
@@ -20,7 +21,7 @@
         <div class="col-6">
             <hr class="mt-4 mb-0">
             <h1 class="display-4 font-weight-bold text-center">
-                <img src="{% static 'media/images/grupa_badawcza.png' %}" alt="There should be awesome logo here, but something went wrong" style="max-width: 75px">
+                <img class="logo-picture" src="{% static 'media/images/logo.png' %}" alt="There should be awesome logo here, but something went wrong" >
                 {% block header %}
                     Payment Base header
                 {% endblock %}

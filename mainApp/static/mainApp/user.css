@@ -1,0 +1,15 @@
+.rounded-circle {
+    width: 200px;
+    height: 200px;
+    border: 1px solid black;
+    margin-right: 10px;
+    margin-bottom: 10px;
+}
+.user-info {
+    max-width: 75%;
+}
+.item-list {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}

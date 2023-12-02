@@ -1,4 +1,9 @@
 {% extends 'mainApp/base.html' %}
+{% load static %}
+
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'mainApp/user.css' %}">
+{% endblock %}
 
 {% block title %}
 User Page
@@ -11,13 +16,13 @@ User Page
     <div class="row">
         <div class="col-md-4 d-flex justify-content-center">
             <div class="align-self-top">
-                <img src="{% static 'media/images/user_avatar.png' %}" class="rounded-circle" alt="Avatar" style="width: 200px; height: 200px; border: 1px solid black; margin-bottom: 10px;">
+                <img src="{% static 'media/images/user_avatar.png' %}" class="rounded-circle" alt="Avatar">
                 <h5 class="mb-0">{{ user.first_name }} {{ user.last_name }}</h5>
                 <p class="text-muted">@{{ user.username }}</p>
             </div>
         </div>
         <div class="col-md-8">
-            <div class="card" style="max-width: 75%">
+            <div class="card user-info">
                 <div class="card-header">
                     <h3 class="font-weight-bold">User Data</h3>
                 </div>
@@ -29,7 +34,7 @@ User Page
                 </div>
             </div>
             <br>
-            <div class="card" style="max-width: 75%">
+            <div class="card user-info">
                 <div class="card-header">
                     <h3 class="font-weight-bold">Address Data</h3>
                 </div>
@@ -55,7 +60,7 @@ User Page
             <h5 class="card-header">Order no. {{ order.number }}</h5>
             <div class="card-body">
                 <h5 class="card-title">Items:</h5>
-                <div style="display: flex; flex-direction: row; flex-wrap: wrap">
+                <div class="item-list">
                     {% for item in order.orderitem_set.all %}
                         <p class="card-text mr-3">{{ item.product.name }} x{{ item.amount }}</p>
                     {% endfor %}

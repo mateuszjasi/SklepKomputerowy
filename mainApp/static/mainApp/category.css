@@ -1,0 +1,13 @@
+.category-items {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+.item-card {
+    width: 20rem;
+    margin: 10px;
+}
+.item-title {
+    display: flex;
+    flex-direction: row;
+}

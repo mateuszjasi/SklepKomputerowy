@@ -1,6 +1,10 @@
 {%  extends "mainApp/base.html" %}
 {% load static %}
 
+{% block css %}
+<link rel="stylesheet" type="text/css" href="{% static 'mainApp/category.css' %}">
+{% endblock %}
+
 {% block title %}
 Category
 {% endblock %}
@@ -26,14 +30,14 @@ Category
             </div>
         </div>
         <br>
-        <div style="display: flex; flex-direction: row; flex-wrap: wrap">
+        <div class="category-items">
             {% for item in items %}
-                <div class="card shadow" style="width: 20rem; margin: 10px">
+                <div class="card shadow item-card">
                     <div class="card-body">
                         <a href="/product/{{ item.pk }}">
                             <img src="{{ item.picture }}" onerror="this.onerror=null;this.src='{% static 'media/images/no_image.png' %}';" class="card-img-top mb-3" >
                         </a>
-                        <div style="display: flex; flex-direction: row">
+                        <div class="item-title">
                             <h5 class="card-title">{{ item }}</h5>
                         </div>
                         <p class="card-text">{{ item.short_description }}</p>

@@ -1,0 +1,14 @@
+.cart-main {
+    height: 80vh;
+    overflow-y: auto;
+}
+.cart-item {
+    width: 45rem;
+}
+.product-title {
+    display: flex;
+    flex-direction: row;
+}
+.action-buttons {
+    font-size:140%;
+}

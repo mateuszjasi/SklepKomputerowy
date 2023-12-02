@@ -1,0 +1,13 @@
+.desc-main {
+    display: flex;
+    flex-direction: row;
+}
+.product-name {
+    font-size:500%;
+}
+.product-desc {
+    font-size:120%;
+}
+.add-button {
+    font-size:200%;
+}
