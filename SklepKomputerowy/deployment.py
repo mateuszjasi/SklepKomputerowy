@@ -26,7 +26,7 @@ conn_str_params = {pair.split('=')[0]: pair.split('=')[1] for pair in conn_str.s
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('AZURE_POSTGRESQL_DBNAME'),
+        'NAME': 'sklepkompmj-database',
         'USER': os.environ.get('AZURE_POSTGRESQL_USER'),
         'PASSWORD': os.environ.get('AZURE_POSTGRESQL_PASSWORD'),
         'HOST': os.environ.get('AZURE_POSTGRESQL_HOST'),
