@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import RegisterForm
+from register.forms import RegisterForm
 
 
 def register(response):

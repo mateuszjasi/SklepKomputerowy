@@ -3,7 +3,7 @@ from django.http import HttpResponseRedirect
 from django.contrib.contenttypes.models import ContentType
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
-from .models import Category, Subcategory, ShopItem, Cart, Order
+from mainApp.models import Category, Subcategory, ShopItem, Cart, Order
 from django.conf import settings
 from paypal.standard.forms import PayPalPaymentsForm
 
