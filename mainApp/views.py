@@ -12,7 +12,8 @@ categories = Category.objects.all()
 
 
 def home(response):
-    return render(response, "mainApp/home.html", {"categories": categories})
+    categoriess = Category.objects.all()
+    return render(response, "mainApp/home.html", {"categories": categoriess})
 
 
 def user(response):
