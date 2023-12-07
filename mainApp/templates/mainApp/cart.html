@@ -18,7 +18,7 @@ Cart
                 <h5>No products in your cart</h5>
             {% else %}
                 {% for item in user_cart.cartitem_set.all %}
-                    <div class="card mb-4 shadow cart-item">
+                    <div class="card mb-4 col-md-12 shadow cart-item">
                         <div class="row">
                             <div class="col-sm-6">
                                 <a href="/product/{{ item.product.id }}">

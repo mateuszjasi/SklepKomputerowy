@@ -2,15 +2,20 @@
 
 <nav class="navbar navbar-light bg-light justify-content-end">
   <form class="form-inline">
-      {% if request.path != "/user/" %}
-          <a href="/user" class="btn btn-outline-success mr-sm-2"><i class="fa-solid fa-user"></i> User Profile</a>
-      {%  endif %}
-      <a href="/cart" class="btn btn-outline-secondary mr-auto"><i class="fa-solid fa-cart-shopping"></i>
-          Cart
-          {% if user.cart.first.cartitem_set.count > 0 %}
-            <span class="badge badge-light">{{ user.cart.first.cartitem_set.count }}</span>
+      {% if user.is_authenticated %}
+          {% if request.path != "/user/" %}
+              <a href="/user" class="btn btn-outline-success mr-sm-2"><i class="fa-solid fa-user"></i> User Profile</a>
+          {% else %}
+              <a href="/edit_user" class="btn btn-outline-primary mr-sm-2"><i class="fa-solid fa-edit"></i> Edit Profile</a>
           {% endif %}
-      </a>
+          <a href="/cart" class="btn btn-outline-secondary mr-sm-2"><i class="fa-solid fa-cart-shopping"></i>
+              Cart
+              {% if user.cart.first.cartitem_set.count > 0 %}
+                <span class="badge badge-light">{{ user.cart.first.cartitem_set.count }}</span>
+              {% endif %}
+          </a>
+          <a href="/logout" class="btn btn-outline-danger mr-sm-2"><i class="fa-solid fa-edit"></i>Logout</a>
+      {%  endif %}
   </form>
 </nav>
 <br>

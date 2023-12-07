@@ -1,8 +1,10 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.http import HttpResponseRedirect
 from django.contrib.contenttypes.models import ContentType
 from django.urls import reverse
 from django.views.decorators.csrf import csrf_exempt
+
+from mainApp.forms import EditUserForm
 from mainApp.models import Category, Subcategory, ShopItem, Cart, Order
 from django.conf import settings
 from paypal.standard.forms import PayPalPaymentsForm
@@ -19,16 +21,27 @@ def user(response):
     if response.user.is_authenticated:
         user_orders = response.user.order.all()
         user_orders = user_orders.order_by("archival", "-id")
-
         if response.method == "POST":
             if response.POST.get("delivered"):
                 order = user_orders.get(id=response.POST.get("delivered", ""))
                 order.archival = True
                 order.save()
                 user_orders = user_orders.order_by("archival", "-id")
-
         return render(response, "mainApp/user.html", {"user": response.user, "orders": user_orders, "categories": categories})
+    else:
+        return render(response, "mainApp/user.html", {"user": response.user, "categories": categories})
 
+
+def edit_user(response):
+    if response.user.is_authenticated:
+        if response.method == "POST":
+            form = EditUserForm(response.POST, instance=response.user)
+            if form.is_valid():
+                form.save()
+                return redirect("/user/")
+        else:
+            form = EditUserForm(instance=response.user)
+        return render(response, "mainApp/edit_user.html", {"form": form, "categories": categories})
     else:
         return render(response, "mainApp/user.html", {"user": response.user, "categories": categories})
 
